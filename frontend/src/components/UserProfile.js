@@ -6,6 +6,7 @@ export default class UserProfile extends Component {
         data: []
     }
     componentDidMount() {
+        // Get the user's current token from local storage and send a GET request to the server
         axios.get('http://127.0.0.1:8000/api/auth/user', { 'headers': { 'Authorization': 'Token ' + localStorage.getItem('token') } })
         .then(res => {
             const data = res.data;
@@ -24,7 +25,7 @@ export default class UserProfile extends Component {
                     <div className="col-sm-6">
                         <div className="card card-body mt-4 mb-4" >
                             <h2>Profile</h2>
-                            {Object.keys(this.state.data).map(obj => <div>{obj + ': ' + this.state.data[obj]}</div>)}
+                            {Object.keys(this.state.data).map(obj => <div key={obj}>{obj + ': ' + this.state.data[obj]}</div>)}
                         </div>
                     </div>
                 </div>

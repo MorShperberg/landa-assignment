@@ -10,7 +10,6 @@ export default class Login extends Component {
     super(props);
 
     this.state = {
-      email: "",
       username: "",
       password: "",
       isAuthenticated: false
@@ -27,7 +26,7 @@ export default class Login extends Component {
   }
 
   handleSubmit(event) {
-    const { email, username, password } = this.state;
+    const { username, password } = this.state;
     axios.defaults.xsrfCookieName = 'csrftoken'
     axios.defaults.xsrfHeaderName = 'X-CSRFToken'
     axios.defaults.withCredentials = true
@@ -35,7 +34,6 @@ export default class Login extends Component {
       .post(
         "http://127.0.0.1:8000/api/auth/login",
             ({
-                email: email,
                 username: username,
                 password: password
             })
@@ -61,17 +59,6 @@ export default class Login extends Component {
                     <div className="card card-body mt-4 mb-4" >
                         <h2>Login</h2>
                         <form onSubmit={this.handleSubmit}>
-                            <div className="form-group">
-                                    <label>Email</label>
-                                    <input
-                                        className="form-control"
-                                        type="email"
-                                        name="email"
-                                        value={this.state.email}
-                                        onChange={this.handleChange}
-                                        required
-                                    />
-                            </div>
                             <div className="form-group">
                                     <label>Username</label>
                                     <input

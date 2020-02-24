@@ -5,7 +5,7 @@ from knox.models import AuthToken
 
 from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
 
-
+# Get User API
 class UserAPIView(generics.RetrieveAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
@@ -15,7 +15,7 @@ class UserAPIView(generics.RetrieveAPIView):
     def get_object(self):
         return self.request.user
 
-
+# Register API
 class RegisterAPIView(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
@@ -24,11 +24,11 @@ class RegisterAPIView(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         return Response({
-            "user": UserSerializer(user, context=self.get_serializer_context()).data,
+            "user": UserSerializer(user, context=self.get_serializer_context()).data, # sending the serialized user and the token in the response
             "token": AuthToken.objects.create(user)[1]
         })
 
-
+# Login API
 class LoginAPIView(generics.GenericAPIView):
     serializer_class = LoginSerializer
 
@@ -37,6 +37,6 @@ class LoginAPIView(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
         return Response({
-            "user": UserSerializer(user, context=self.get_serializer_context()).data,
+            "user": UserSerializer(user, context=self.get_serializer_context()).data,  # sending the serialized user and the token in the response
             "token": AuthToken.objects.create(user)[1]
         })

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 from rest_framework import serializers
 
-User._meta.get_field('email')._unique = True
+User._meta.get_field('email')._unique = True # not allow registration of duplicate email addresses
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -19,6 +19,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
+        # create new user in django's default Users table
         user = User.objects.create_user(
             validated_data['username'],
             validated_data['email'],
@@ -32,6 +33,7 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
     def validate(self, data):
+        # authenticate the user's credentials
         user = authenticate(**data)
         if user and user.is_active:
             return user
