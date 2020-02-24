@@ -72,7 +72,7 @@ export default class Registration extends Component {
                             />
                       </div>
                       <div className="form-group">
-                            <label>User Name</label>
+                            <label>Username</label>
                             <input
                                 className="form-control"
                                 type="text"

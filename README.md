@@ -19,6 +19,7 @@ The authentication is made with django-rest-knox and djangorestframework.
 ```
 pip install djangorestframework
 pip install django-rest-knox
+pip install django-cors-headers
 ```
 
 ## Running the project
