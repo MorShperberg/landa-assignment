@@ -19,9 +19,9 @@ export default class UserProfile extends Component {
 
     render() {
         return (
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm-6">
                         <div className="card card-body mt-4 mb-4" >
                             <h2>Profile</h2>
                             {Object.keys(this.state.data).map(obj => <div>{obj + ': ' + this.state.data[obj]}</div>)}

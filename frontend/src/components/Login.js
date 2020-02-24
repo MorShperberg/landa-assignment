@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
+    Link,
+    Redirect
   } from "react-router-dom";
 import axios from "axios";
-import UserProfile from './UserProfile'
 
 export default class Login extends Component {
   constructor(props) {
@@ -55,12 +52,12 @@ export default class Login extends Component {
 
   render() {
     if (this.state.isAuthenticated) {
-        return <Route><UserProfile /></Route>;
+        return <Redirect to='/user' />
     }
     return (
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
+        <div className="container">
+            <div className="row">
+                <div className="col-sm-6">
                     <div className="card card-body mt-4 mb-4" >
                         <h2>Login</h2>
                         <form onSubmit={this.handleSubmit}>
@@ -97,7 +94,8 @@ export default class Login extends Component {
                                         required
                                     />
                             </div>
-                            <button type="submit" className="btn btn-primary">Login</button>
+                            <button type="submit" className="btn btn-primary">Login</button>&emsp;
+                            <Link to="/signup">Sign up</Link>
                         </form>
                     </div>
                 </div>
